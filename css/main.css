@@ -1,0 +1,100 @@
+a {
+	text-decoration: none;
+}
+
+a hover {
+    color: white;
+}
+
+.logo {
+    text-align: center;
+    margin: 2em;
+
+}
+.button_link {
+    color: white;
+    text-decoration: none;
+}
+
+.button_link :hover{
+    color: white;
+}
+.headerRegist {
+    text-align: center;
+    padding: 1em;
+    margin: 1em 2em;
+}
+
+registroContainer{
+padding-left: 25%;
+text-align: center;
+}
+
+.form-label{
+    display: flex;
+    padding-left: 1em;
+    text-indent: -1em;
+    padding-bottom: 1em;
+    padding-top: 1em;
+    text-align: left;
+    font-weight: bold;
+    
+    
+
+}
+
+.maincont {
+    margin-left: 33%;
+}
+
+
+.mainForm {
+    margin: 5em 2em;
+    padding: 2em;
+    width: 35em;
+    border-radius: 16px;
+    background-color: #8ab3c4;
+    
+}
+
+.form_imput {
+    width: 30em;
+    padding: 1em;
+    text-align: left;
+    border: 1px solid #C5C5C5;
+    border-radius: 8px;
+    
+}
+
+.formStyle {
+    display: block;
+    text-align: center;
+    padding-left: 2em;
+}
+
+.swal-modal {
+    background-color: rgba(63,255,106,0.69);
+    border: 3px solid white;
+  }
+
+.nolinkdec {
+ text-decoration: none;
+ color: white;
+}
+
+
+#display-image{
+    width:5em;
+    height:5em;
+    border-radius: 50%;
+    border: 1px solid rgb(2, 48, 253);
+    background-position: center;
+    background-size: cover;
+}
+
+.gifpantalla {
+    width: 20em;
+    height: 10em;
+    position:relative;
+    border-radius: 1em;
+}
