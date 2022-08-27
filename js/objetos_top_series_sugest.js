@@ -269,7 +269,7 @@ function guardarContinuar(){
                         confirmButton: 'btn btn-prymary',
                         cancelButton: 'btn btn-danger',
                       },
-                    title: 'Gracias. ¿Quiere ver tu Perfil?',
+                    title: 'Gracias. ¿Quieres ver tu Perfil?',
                     icon: 'success',
                     showCancelButton: true,
                 confirmButtonText: `<a class="text-decoration-none text-white button_link" href="perfil-user.html">¡Sí, vamos allá!</a>`,
