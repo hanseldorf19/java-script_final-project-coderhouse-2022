@@ -1,12 +1,12 @@
-// Variables
-
-let userSelectedPelis = [];
-
-let userTotalPelisSave = [];
 
 //Funciones
 
-// Función Seleccionar y Mostrar (con botones Guardar y Quitar)
+// Función Seleccionar y Mostrar
+
+let userSelectedPelis = [];
+let userGuardadasPelis = [];
+
+
     
 function mostrarSelectPeli(peliSelec){
     console.log('Esta es la peli seleccionada '+ peliSelec.title);
@@ -35,7 +35,7 @@ function mostrarSelectPeli(peliSelec){
         
     }
 
-//  Mostrar en una lista las Peliculas listas para guardar
+// Guardar CADA PELI seleccionada y mostrarlas en una lista
 
 function guardarSelectpeli(peliSelecTitle){
 
@@ -64,15 +64,14 @@ function guardarSelectpeli(peliSelecTitle){
 
 }
 
-// Quitar y Poner CADA PELI a la lista y a seleccionados
+// Quitar y Poner CADA PELI
 
 let pelisResume = document.getElementById('TusPelis');
 
 // Quitar peliculas 
 
-    function quitarSelectpeli(peliSelecTitle){
 
-        // Quitar Pelis de la Lista (botón Quitar)
+    function quitarSelectpeli(peliSelecTitle){
 
         arrayIntermedio=[];
             for(let i=0;i<userSelectedPelis.length;i++){
@@ -82,31 +81,11 @@ let pelisResume = document.getElementById('TusPelis');
                 }
             }
 
-            userSelectedPelis = arrayIntermedio;
-            console.log(userSelectedPelis);
+            userSelectedPelis=arrayIntermedio;
+           // volvemos a renderizar
         
-        // Volvemos a crear la lista con el array actualizado con el elemento sustraido
+           console.log(userSelectedPelis);
         
-           userSelectedPelis.forEach((peliSelecTitle)=> {
-              
-               let auxHtml =
-               
-               `
-               <li>${peliSelecTitle.title}</li>
-   
-               `
-            
-               pelisResume.innerHTML += auxHtml;
-               
-           });
-
-        // Quitamos el DIV creado #peliSel cuando se genera una peli seleccionada
-   
-           let PeliQuitar = document.querySelector('#peliSel');
-           PeliQuitar.remove('peliSel');
-
-           // Dibujamos botón "Guardar y Continuar"
-
            pelisResume.innerHTML= 
            
            `
@@ -114,16 +93,31 @@ let pelisResume = document.getElementById('TusPelis');
            onclick="guardarContinuar({title: '${peliSelecTitle}'})">Guardar y Continuar</button>
    
            `
+           userSelectedPelis.forEach((peliSelecTitle)=> {
+              // if(peliSelecTitle.title!=peliSelecTitle){
+               let auxHtml =
+               
+               `
+               <li>${peliSelecTitle.title}</li>
+   
+               `
+              // }
+               pelisResume.innerHTML += auxHtml;
+               
+           });
+   
+           let PeliQuitar = document.querySelector('#peliSel');
+           PeliQuitar.remove('peliSel');
 
     }
 
 
 
-// GUARDAR PELIS POR GENERO, limpiar y continuar a la segunda selección - Botón Guardar y Continuar
+// GUARDAR PELIS POR GENERO, limpiar y continuar a la segunda selección
 
-let pelisSave1 = [];
-let pelisSave2 = [];
-let pelisSave3 = [];
+let pelisSave1 = []
+let pelisSave2 = []
+let pelisSave3 = []
 
 function guardarContinuar(){
     
@@ -139,8 +133,7 @@ function guardarContinuar(){
     pelisResume.innerHTML = '';
     
 
-    // Monstramos las guardadas para cada genero según lo largo que 
-    // sea el array con los generos seleccionas (máx 3)
+    // Monstramos las guardadas para cada grupo
 
     switch (tusGenPelis.length) {
 
@@ -155,13 +148,9 @@ function guardarContinuar(){
             console.log(pelisSave1)
             let guardadas1 = document.getElementById('Pelis_guardadas1');
     
-            // Aparece el título del genero 1 guardado
-
             guardadas1.innerHTML=
             `<div class="rounded p-2 bg-success text-white w-75">
             <h5>${tusGenPelis[0]}</h5>`
-
-            // Redibujamos lista de peliculas guardadas del genero 1
 
             pelisSave1.forEach((peli)=> {
                     
@@ -175,33 +164,20 @@ function guardarContinuar(){
                 guardadas1.innerHTML += auxHtml;
                 
             });
-
-            // Guardamos en el array total de pelis Guardadas
-
-            for (let j = 0; j < pelisSave1.length; j++) {
-                userTotalPelisSave.push(pelisSave1[j]);
-                
-            }
-            
             
             break;
 
         case 2:
             
-            // Obtenemos el array filtrando y quitando las peliculas del genero guardado 1
-
             pelisSave2 = userSelectedPelis.filter(peli => !pelisSave1.includes(peli));
 
+            console.log(pelisSave2)
            
             let guardadas2 = document.getElementById('Pelis_guardadas2');
     
-            // Aparece el título del genero 2 guardado
-
             guardadas2.innerHTML=
             `<div class="rounded p-2 bg-success text-white w-75">
             <h5>${tusGenPelis[1]}</h5>`
-
-            // Redibujamos lista de peliculas guardadas del genero 2
 
             pelisSave2.forEach((peli)=> {
                     
@@ -216,33 +192,23 @@ function guardarContinuar(){
                 
             });
 
-
             break;
         
             case 3:
-
-            // Obtenemos el array del genero 3
-            // Creamos un array auxiliar que concatena el 1 y el 2
-
                 pelisSave1_y_2 = pelisSave1.concat(pelisSave2);
-            
-            // Obtenemos el array filtrando y quitando las peliculas del genero auxiliar 
-            // que representa el grupo de pelis del genero 1 y 2
 
                 pelisSave3 = userSelectedPelis.filter(peli => !pelisSave1_y_2.includes(peli));
+            
+                console.log(pelisSave1_y_2)
                
                 
                 let guardadas3 = document.getElementById('Pelis_guardadas3');
-            
-            // Aparece el título del genero 2 guardado
-
+        
                 guardadas3.innerHTML=
                 `<div class="rounded p-2 bg-success w-75 text-white">
                 <h5>${tusGenPelis[2]}</h5>`
-
-                // Redibujamos lista de peliculas guardadas del genero 2
     
-                pelisSave2.forEach((peli)=> {
+                pelisSave3.forEach((peli)=> {
                         
                     let auxHtml2 =
                     
@@ -255,7 +221,6 @@ function guardarContinuar(){
                     
                 });
 
-        // Llegados a los 3 generos guardados y avisamos con un Sweet Alert para continuar
                 
                 setTimeout(() => {
                    
@@ -275,36 +240,24 @@ function guardarContinuar(){
                     
                 })
 
-        // Obtenemos un array con el total de las pelis seleccionadas y guardadas
-
-                userTotalPelisSave = pelisSave1_y_2.concat(pelisSave3);
-               
                 break;
 
         default:
-
-          
+            console.log(tusGenPelis);
             break;
     }
     
-    // Guardamos en el array total de pelis Guardadas en el navegador
-    // para sacarlas luego en el portfolio del perfil del usuario
-
-    console.log(userTotalPelisSave);
-
-    localStorage.setItem('Peliculas Fav Guardadas', JSON.stringify(userTotalPelisSave));
 
 }
     `
     </div>
     `
-// Mostrar Pelicuas
 
-// Renderizamos Peliculas obtenidas de listas de la API The Movie DB
+// Peliculas
 
- // Peliculas Acción
+ // Peliculas Accion
 
- function renderizarPelisAccion() {
+ function renderizarPelisAccion(genPelis) {
     fetch('https://api.themoviedb.org/4/list/8213257?page=1&api_key=161f4589b4111b17189d0d3aece041e3&language=es')
     .then((respIni)=>(respIni.json()))
     .then((resp)=> {
@@ -360,7 +313,6 @@ function guardarContinuar(){
     })
     
     } 
-
 
 // Peliculas Ciencia Ficción 
 
@@ -461,7 +413,10 @@ function renderizarPelis_Comedia() {
     
     } 
 
+
+
 // Peliculas Drama
+
 
 function renderizarPelis_Drama() {
     fetch('https://api.themoviedb.org/4/list/8213822?page=1&api_key=161f4589b4111b17189d0d3aece041e3&language=es')
@@ -510,6 +465,7 @@ function renderizarPelis_Drama() {
     } 
 
 // Peliculas Suspense
+
 
 function renderizarPelis_Suspense() {
     fetch('https://api.themoviedb.org/4/list/8213850?page=1&api_key=161f4589b4111b17189d0d3aece041e3&language=es')
